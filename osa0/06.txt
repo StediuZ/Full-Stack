@@ -1,0 +1,7 @@
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+palvelin-->selain: {"message":"note created"}
+
+
+note over selain:
+teksti piirtyy sivulle, mutta SPA tyyliin mitään ei ladata uudelleen
+end note
