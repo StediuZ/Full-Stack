@@ -1,0 +1,29 @@
+{
+  "name": "luettelobackend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build && cp -r build ../notes-backend",
+    "deploy": "flyctl deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "flyctl logs",
+    "lint": "eslint ."
+  },
+  "author": "Olli",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "nodemon": "^2.0.19"
+  }
+}

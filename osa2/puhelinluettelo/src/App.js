@@ -35,6 +35,7 @@ const PersonForm = (props)=>{
 }
 const Persons = (props) =>{
   useEffect(()=>{personService.getAll().then(response=>props.setPersons(response.data))},[])  
+  
   return(
     props.persons.map(i=>
     {if(i.name.toLowerCase().includes(props.newFilter.toLowerCase())){
@@ -71,7 +72,11 @@ const App = () => {
     personService.getAll().then(response => {
       setPersons(response.data)
       })
+      .catch(error =>{
+        console.log(error.response.data)
+      })
   },[])
+  
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
@@ -92,9 +97,9 @@ const App = () => {
       if (window.confirm(newName+" is already in phonebook, do you want to replace old number with new one?")) {
         console.log(newName)
         console.log(persons)
-        const ind = persons.findIndex(ij => ij.name===newName)+1
+        const ind = persons.findIndex(ij => ij.name===newName)
         console.log(ind)
-        personService.update(ind,personObject)
+        personService.update(persons[ind].id,personObject)
         
         
         /*.then(response => {
@@ -102,6 +107,14 @@ const App = () => {
           //setPersons('')
           
       })*/
+      .catch(error => {
+        console.log(error.response.data)
+        /*setMessage(
+          error.response.data
+        )
+      setNature("bad")
+      setTimeout(() => {setMessage(null)}, 5000)*/
+      })
     }}  else {
       
       personService
@@ -109,6 +122,15 @@ const App = () => {
       .then(response => {
         setPersons(persons.concat(response.data))
         //setPersons('')
+      })
+      .catch(error => {
+        console.log(error.response.data)
+        console.log(error.response.data.error)
+        setMessage(
+          error.response.data.error
+        )
+      setNature("bad")
+      setTimeout(() => {setMessage(null)}, 5000)
       })
     }
     setMessage("person "+newName+" was added")

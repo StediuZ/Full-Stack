@@ -1,0 +1,9 @@
+POST /api/persons
+Host: localhost:3001
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "samplee",
+    "number": "234234"
+}
